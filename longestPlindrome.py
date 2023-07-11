@@ -22,7 +22,33 @@
 # 1 <= s.length <= 1000
 # s consist of only digits and English letters.
 
-def check_palindrone(s, mid_index):
+
+def checkPalindrome(s):
+     if s == '':
+          return False
+     n = len(s)
+     i = 0
+     while i <= n//2:
+          if s[i] != s[n-1-i]:
+            return False
+          i+=1
+     return True
+    
+    
+def longestPalindromeV1(s):
+    size = len(s)
+    max_lenght = 0
+    for i in range(size):
+         for j in range(i+1, size):
+              print("calculating palindome for s ", i, j, s[i:j])
+              is_palindrome = checkPalindrome(s[i:j])
+              if is_palindrome:
+                   max_lenght = max(max_lenght, j-i + 1)
+    #      print(s[i])
+    return max_lenght
+
+
+def get_palindrome_leght(s, mid_index):
     n = len(s)
     i = 1
     # Check all left and right
@@ -36,11 +62,14 @@ def longestPalindrome(s):
     max_lenght = 0
     for i in range(size):
         # Check odd lenght palindrome
-        length = check_palindrone(s,i)
+        length = get_palindrome_leght(s,i)
         max_lenght = max(max_lenght, length)
         # TODO even length palindrome
         
     return max_lenght
 
 s = "acbabcf"
-longestPalindrome(s)
+s = "abcdcb"
+# longestPalindrome(s)
+ans = longestPalindromeV1(s)
+print(ans)
